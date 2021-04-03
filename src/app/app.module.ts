@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateTaskModalComponent } from './create-task-modal/create-task-modal.component';
 import { NotificationModule } from './notification/notification.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,9 @@ import { NotificationModule } from './notification/notification.module';
     CreateTaskModalComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    FormsModule,
     NotificationModule
   ],
   providers: [],

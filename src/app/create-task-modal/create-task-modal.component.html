@@ -1,15 +1,24 @@
 <div id="createTaskModal" class="modal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Créer une tâche</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
-                <p>Il n'y a rien ici pour l'instant, mais attendez voir.</p>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="newTaskTitle" [(ngModel)]="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="newTaskDescription" [(ngModel)]="description" name="description"></textarea>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearFields()">Annuler</button>
                 <button type="button" class="btn btn-primary" (click)="submit()">Créer</button>
             </div>
         </div>

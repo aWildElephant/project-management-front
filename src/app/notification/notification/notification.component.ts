@@ -12,9 +12,6 @@ export class NotificationComponent implements OnInit {
   @Input() description?: string
 
   ngOnInit() {
-    console.log(this.message)
-    console.log(this.description);
-
     [].slice.call(document.querySelectorAll('.toast')).map(function (toastEl) {
       return new Toast(toastEl, {
         animation: true,

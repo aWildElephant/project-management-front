@@ -12,7 +12,9 @@ export class CreateTaskModalComponent implements OnInit {
   @Input() active: boolean = false;
   @Output() activeChange = new EventEmitter<boolean>();
 
-  modal?: Modal;
+  modal?: Modal
+  title: string = ""
+  description?: string
 
   constructor(private notificationService: NotificationService) {
   }
@@ -37,6 +39,13 @@ export class CreateTaskModalComponent implements OnInit {
 
   submit() {
     this.modal?.hide()
+    console.log("Title:%s, description:%s", this.title, this.description)
+    this.clearFields();
     this.notificationService.warning("Mauvaise nouvelle", "La sauvegarde de tâche n'est pas implémentée, tout ce que vous avez rempli a été perdu :>");
+  }
+
+  clearFields() {
+    this.title = ""
+    this.description = undefined
   }
 }
