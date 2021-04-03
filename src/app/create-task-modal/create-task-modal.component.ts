@@ -8,28 +8,29 @@ import { Modal } from 'bootstrap';
 })
 export class CreateTaskModalComponent implements OnInit {
 
-  @Input()  active: boolean = false;
+  @Input() active: boolean = false;
   @Output() activeChange = new EventEmitter<boolean>();
 
-  modalElement?: HTMLElement;
-  
+  modal?: Modal;
+
   constructor() {
   }
 
   ngOnInit() {
-    this.modalElement = document.getElementById("createTaskModal") || undefined;
+    const modalElement = document.getElementById("createTaskModal");
 
-    this.modalElement?.addEventListener("hidden.bs.modal", () => {
-      this.activeChange.emit(false)
-    })
+    if (modalElement != null) {
+      modalElement.addEventListener("hidden.bs.modal", () => {
+        this.activeChange.emit(false)
+      })
+
+      this.modal = new Modal(modalElement)
+    }
   }
 
   ngOnChanges() {
     if (this.active) {
-      if (this.modalElement) {
-        console.log("Showing #createTaskModal");
-        new Modal(this.modalElement).show();
-      }
+      this.modal?.show()
     }
   }
 }
