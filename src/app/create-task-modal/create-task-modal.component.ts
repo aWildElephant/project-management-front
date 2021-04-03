@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-create-task-modal',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateTaskModalComponent implements OnInit {
 
-  constructor() { }
+  @Input()  active: boolean = false;
+  @Output() activeChange = new EventEmitter<boolean>();
 
-  ngOnInit(): void {
+  modalElement?: HTMLElement;
+  
+  constructor() {
   }
 
+  ngOnInit() {
+    this.modalElement = document.getElementById("createTaskModal") || undefined;
+
+    this.modalElement?.addEventListener("hidden.bs.modal", () => {
+      this.activeChange.emit(false)
+    })
+  }
+
+  ngOnChanges() {
+    if (this.active) {
+      if (this.modalElement) {
+        console.log("Showing #createTaskModal");
+        new Modal(this.modalElement).show();
+      }
+    }
+  }
 }

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'project-management-front';
+
+  createTaskModalActive = false;
+
+  openCreateTaskModal() {
+    this.createTaskModalActive = true
+  }
 }
