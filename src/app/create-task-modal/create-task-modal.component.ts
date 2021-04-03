@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Modal } from 'bootstrap';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
   selector: 'app-create-task-modal',
@@ -13,7 +14,7 @@ export class CreateTaskModalComponent implements OnInit {
 
   modal?: Modal;
 
-  constructor() {
+  constructor(private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -32,5 +33,10 @@ export class CreateTaskModalComponent implements OnInit {
     if (this.active) {
       this.modal?.show()
     }
+  }
+
+  submit() {
+    this.modal?.hide()
+    this.notificationService.warning("Mauvaise nouvelle", "La sauvegarde de tâche n'est pas implémentée, tout ce que vous avez rempli a été perdu :>");
   }
 }

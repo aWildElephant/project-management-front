@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateTaskModalComponent } from './create-task-modal/create-task-modal.component';
+import { NotificationModule } from './notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { CreateTaskModalComponent } from './create-task-modal/create-task-modal.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NotificationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
