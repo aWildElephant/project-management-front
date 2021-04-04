@@ -6,12 +6,16 @@ import { AppComponent } from './app.component'
 import { CreateTaskModalComponent } from './create-task-modal/create-task-modal.component'
 import { NotificationModule } from './notification/notification.module'
 import { FormsModule } from '@angular/forms'
-import { BackendClientModule } from './backend-client/backend-client.module'
+import { BackendClientModule } from './backend-client/backend-client.module';
+import { BacklogComponent } from './backlog/backlog.component';
+import { BacklogItemComponent } from './backlog-item/backlog-item.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateTaskModalComponent
+    CreateTaskModalComponent,
+    BacklogComponent,
+    BacklogItemComponent
   ],
   imports: [
     AppRoutingModule,

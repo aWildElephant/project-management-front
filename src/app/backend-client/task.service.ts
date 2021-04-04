@@ -17,4 +17,8 @@ export class TaskService {
   get(identifier: number): Promise<Task> {
     return this.client.get<Task>(`http://localhost:3000/task/${identifier}`).toPromise()
   }
+
+  list(): Promise<Task[]> {
+    return this.client.get<Task[]>("http://localhost:3000/task/list").toPromise()
+  }
 }
