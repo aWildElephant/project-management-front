@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { AppNotification } from './notification.interface';
+import { AppNotification, AppNotificationLevel } from './notification.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,19 @@ export class NotificationService {
 
   constructor() { }
 
-  warning(message: string, description: string) {
+  info(message: string, description: string) {
     this.bus.emit({
+      level: AppNotificationLevel.INFO,
       message: message,
       description: description 
+    })
+  }
+
+  error(message: string, description: string) {
+    this.bus.emit({
+      level: AppNotificationLevel.ERROR,
+      message: message,
+      description: description
     })
   }
 

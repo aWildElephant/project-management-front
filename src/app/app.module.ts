@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CreateTaskModalComponent } from './create-task-modal/create-task-modal.component';
 import { NotificationModule } from './notification/notification.module';
 import { FormsModule } from '@angular/forms';
+import { BackendClientModule } from './backend-client/backend-client.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     AppRoutingModule,
+    BackendClientModule,
     BrowserModule,
     FormsModule,
     NotificationModule
