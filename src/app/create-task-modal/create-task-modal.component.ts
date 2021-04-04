@@ -44,10 +44,11 @@ export class CreateTaskModalComponent implements OnInit {
     this.taskService.create({
       title: this.title,
       description: this.description
-    }).then(() => {
+    }).then(task => {
       this.clearFields()
-      this.notificationService.info("Succès", "La tâche a été créée")
-    }).catch(() => {
+      this.notificationService.info("Succès", `La tâche #${task.id} a été créée`)
+    }).catch(error => {
+      console.error(error)
       this.notificationService.error("Erreur", "La tâche n'a pas pu être créée")
     })
   }

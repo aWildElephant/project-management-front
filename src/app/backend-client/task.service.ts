@@ -11,10 +11,10 @@ export class TaskService {
   constructor(private client: HttpClient) { }
 
   create(task: Task): Promise<Task> {
-    return this.client.post<Task>("localhost:3000/task", task).toPromise()
+    return this.client.post<Task>("http://localhost:3000/task", task).toPromise()
   }
 
   get(identifier: number): Promise<Task> {
-    return this.client.get<Task>(`localhost:3000/task/${identifier}`).toPromise()
+    return this.client.get<Task>(`http://localhost:3000/task/${identifier}`).toPromise()
   }
 }

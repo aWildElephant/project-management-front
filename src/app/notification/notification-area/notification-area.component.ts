@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Toast } from 'bootstrap';
 import { NotificationService } from '../notification.service';
 import { AppNotification } from '../notification.interface';
 
@@ -9,15 +10,56 @@ import { AppNotification } from '../notification.interface';
 })
 export class NotificationAreaComponent implements OnInit {
 
-  notifications: AppNotification[] = []
+  private toast?: Toast
+  private shown: boolean = false
+
+  lastNotification?: AppNotification
+  nextNotification?: AppNotification
 
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.notificationService.subscribe((notification) => this.stackNotification(notification))
+    const toastElement = document.getElementById("lastNotificationToast");
+
+    if (toastElement != null) {
+      this.toast = new Toast(toastElement, {
+        animation: true,
+        delay: 5000
+      })
+
+      toastElement.addEventListener("shown.bs.toast", this.toastShown)
+      toastElement.addEventListener("hidden.bs.toast", this.toastHidden)
+    }
+
+    this.notificationService.subscribe(notification => this.handle(notification))
   }
 
-  stackNotification(notification: AppNotification) {
-    this.notifications.push(notification)
+  handle(notification: AppNotification) {
+    this.nextNotification = notification
+
+    if (this.shown) {
+      this.toast?.hide()
+    } else {
+      this.showNextNotification()
+    }
+  }
+
+  private toastShown() {
+    this.shown = true
+  }
+
+  private toastHidden() {
+    this.shown = false
+
+    if (this.nextNotification) {
+      this.showNextNotification()
+    }
+  }
+
+  private showNextNotification() {
+    this.lastNotification = this.nextNotification
+    this.nextNotification = undefined
+
+    this.toast?.show()
   }
 }
