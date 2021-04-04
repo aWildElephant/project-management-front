@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Toast } from 'bootstrap';
-import { NotificationService } from '../notification.service';
-import { AppNotification } from '../notification.interface';
+import { Component, OnInit } from '@angular/core'
+import { Toast } from 'bootstrap'
+import { NotificationService } from '../notification.service'
+import { AppNotification } from '../notification.interface'
 
 @Component({
   selector: 'app-notification-area',
@@ -11,7 +11,7 @@ import { AppNotification } from '../notification.interface';
 export class NotificationAreaComponent implements OnInit {
 
   private toast?: Toast
-  private shown: boolean = false
+  private shown = false
 
   lastNotification?: AppNotification
   nextNotification?: AppNotification
@@ -19,7 +19,7 @@ export class NotificationAreaComponent implements OnInit {
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    const toastElement = document.getElementById("lastNotificationToast");
+    const toastElement = document.getElementById('lastNotificationToast')
 
     if (toastElement != null) {
       this.toast = new Toast(toastElement, {
@@ -27,14 +27,14 @@ export class NotificationAreaComponent implements OnInit {
         delay: 5000
       })
 
-      toastElement.addEventListener("shown.bs.toast", this.toastShown)
-      toastElement.addEventListener("hidden.bs.toast", this.toastHidden)
+      toastElement.addEventListener('shown.bs.toast', this.toastShown)
+      toastElement.addEventListener('hidden.bs.toast', this.toastHidden)
     }
 
     this.notificationService.subscribe(notification => this.handle(notification))
   }
 
-  handle(notification: AppNotification) {
+  handle(notification: AppNotification): void {
     this.nextNotification = notification
 
     if (this.shown) {
@@ -44,11 +44,11 @@ export class NotificationAreaComponent implements OnInit {
     }
   }
 
-  private toastShown() {
+  private toastShown(): void {
     this.shown = true
   }
 
-  private toastHidden() {
+  private toastHidden(): void {
     this.shown = false
 
     if (this.nextNotification) {
@@ -56,7 +56,7 @@ export class NotificationAreaComponent implements OnInit {
     }
   }
 
-  private showNextNotification() {
+  private showNextNotification(): void {
     this.lastNotification = this.nextNotification
     this.nextNotification = undefined
 

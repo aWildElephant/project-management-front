@@ -60,6 +60,10 @@
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,
+    "object-literal-shorthand": [
+      true, 
+      "never"
+    ],
     "object-literal-key-quotes": [
       true,
       "as-needed"
@@ -70,7 +74,7 @@
     ],
     "semicolon": {
       "options": [
-        "always"
+        "never"
       ]
     },
     "space-before-function-paren": {

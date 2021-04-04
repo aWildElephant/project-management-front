@@ -1,30 +1,31 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Modal } from 'bootstrap';
-import { TaskService } from '../backend-client/task.service';
-import { NotificationService } from '../notification/notification.service';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core'
+import { Modal } from 'bootstrap'
+
+import { TaskService } from '../backend-client/task.service'
+import { NotificationService } from '../notification/notification.service'
 
 @Component({
   selector: 'app-create-task-modal',
   templateUrl: './create-task-modal.component.html',
   styleUrls: ['./create-task-modal.component.sass']
 })
-export class CreateTaskModalComponent implements OnInit {
+export class CreateTaskModalComponent implements OnInit, OnChanges {
 
-  @Input() active: boolean = false;
-  @Output() activeChange = new EventEmitter<boolean>();
+  @Input() active = false
+  @Output() activeChange = new EventEmitter<boolean>()
 
   modal?: Modal
-  title: string = ""
+  title = ''
   description?: string
 
   constructor(private notificationService: NotificationService, private taskService: TaskService) {
   }
 
-  ngOnInit() {
-    const modalElement = document.getElementById("createTaskModal");
+  ngOnInit(): void {
+    const modalElement = document.getElementById('createTaskModal')
 
     if (modalElement != null) {
-      modalElement.addEventListener("hidden.bs.modal", () => {
+      modalElement.addEventListener('hidden.bs.modal', () => {
         this.activeChange.emit(false)
       })
 
@@ -32,29 +33,28 @@ export class CreateTaskModalComponent implements OnInit {
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (this.active) {
       this.modal?.show()
     }
   }
 
-  submit() {
+  submit(): void {
     this.modal?.hide()
-    console.log("Title:%s, description:%s", this.title, this.description)
     this.taskService.create({
       title: this.title,
       description: this.description
     }).then(task => {
       this.clearFields()
-      this.notificationService.info("Succès", `La tâche #${task.id} a été créée`)
+      this.notificationService.info('Succès', `La tâche #${task.id} a été créée`)
     }).catch(error => {
       console.error(error)
-      this.notificationService.error("Erreur", "La tâche n'a pas pu être créée")
+      this.notificationService.error('Erreur', 'La tâche n\'a pas pu être créée')
     })
   }
 
-  clearFields() {
-    this.title = ""
+  clearFields(): void {
+    this.title = ''
     this.description = undefined
   }
 }

@@ -1,4 +1,4 @@
-export enum AppNotificationLevel { ERROR = "error", WARNING = "warning", INFO = "info" }
+export enum AppNotificationLevel { ERROR = 'error', WARNING = 'warning', INFO = 'info' }
 
 export interface AppNotification {
     level: AppNotificationLevel,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
@@ -6,11 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'project-management-front';
 
-  createTaskModalActive = false;
+  title = 'project-management-front'
 
-  openCreateTaskModal() {
+  createTaskModalActive = false
+
+  openCreateTaskModal(): void {
     this.createTaskModalActive = true
   }
 }
