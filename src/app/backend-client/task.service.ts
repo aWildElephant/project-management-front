@@ -19,6 +19,6 @@ export class TaskService {
   }
 
   list(): Promise<Task[]> {
-    return this.client.get<Task[]>("http://localhost:3000/task/list").toPromise()
+    return this.client.get<Task[]>('http://localhost:3000/task/list').toPromise()
   }
 }

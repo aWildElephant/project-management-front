@@ -7,13 +7,8 @@ import { Task } from '../backend-client/task.interface'
   templateUrl: './backlog-item.component.html',
   styleUrls: ['./backlog-item.component.sass']
 })
-export class BacklogItemComponent implements OnInit {
+export class BacklogItemComponent {
 
   @Input() task?: Task
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
