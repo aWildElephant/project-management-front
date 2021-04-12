@@ -1,4 +1,15 @@
-<div class="d-flex w-100 justify-content-between">
+<div class="d-flex flex-row w-100 justify-content-between">
     <h5 class="mb-1"><a [routerLink]="['/task', task?.id]">#{{task?.id}}</a> - {{ task?.title }}</h5>
+
+    <div class="btn-group justify-content-end" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Actions
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="['/task', task?.id]">Détails</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="deleteTask()">Supprimer</a></li>
+        </ul>
+    </div>
 </div>
 <p class="mb-1">{{ task?.description }}</p>

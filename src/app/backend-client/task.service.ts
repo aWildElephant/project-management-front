@@ -18,6 +18,10 @@ export class TaskService {
     return this.client.get<Task>(`http://localhost:3000/task/${identifier}`).toPromise()
   }
 
+  delete(identifier: number): Promise<void> {
+    return this.client.delete(`http://localhost:3000/task/${identifier}`, {responseType: 'text'}).toPromise().then()
+  }
+
   list(): Promise<Task[]> {
     return this.client.get<Task[]>('http://localhost:3000/task/list').toPromise()
   }
