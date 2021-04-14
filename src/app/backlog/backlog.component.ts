@@ -23,7 +23,7 @@ export class BacklogComponent implements OnInit {
     const inProgressTasks: Task[] = []
     const doneTasks: Task[] = []
 
-    for (let task of tasks) {
+    for (const task of tasks) {
       switch (task.status) {
         case Status.OPEN:
           openTasks.push(task)
