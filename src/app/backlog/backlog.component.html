@@ -1,5 +1,18 @@
+<h2>À faire</h2>
 <div class="list-group list-group-flush">
-    <div class="list-group-item" *ngFor="let task of tasks" >
+    <div class="list-group-item" *ngFor="let task of openTasks">
+        <app-backlog-item [task]="task"></app-backlog-item>
+    </div>
+</div>
+<h2>En cours</h2>
+<div class="list-group list-group-flush">
+    <div class="list-group-item" *ngFor="let task of inProgressTasks">
+        <app-backlog-item [task]="task"></app-backlog-item>
+    </div>
+</div>
+<h2>Terminé</h2>
+<div class="list-group list-group-flush">
+    <div class="list-group-item" *ngFor="let task of doneTasks">
         <app-backlog-item [task]="task"></app-backlog-item>
     </div>
 </div>
