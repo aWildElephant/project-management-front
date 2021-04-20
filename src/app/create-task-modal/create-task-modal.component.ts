@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 import { Modal } from 'bootstrap'
 
 import { TaskService } from '../backend-client/task.service'
-import { NotificationService } from '../notification/notification.service'
+import { TaskCreatedEvent, TaskCreationFailedEvent } from '../event/event.interface'
+import { EventService } from '../event/event.service'
 
 @Component({
   selector: 'app-create-task-modal',
@@ -18,7 +19,7 @@ export class CreateTaskModalComponent implements OnInit, OnChanges {
   title = ''
   description?: string
 
-  constructor(private notificationService: NotificationService, private taskService: TaskService) {
+  constructor(private eventService: EventService, private taskService: TaskService) {
   }
 
   ngOnInit(): void {
@@ -46,10 +47,9 @@ export class CreateTaskModalComponent implements OnInit, OnChanges {
       description: this.description
     }).then(task => {
       this.clearFields()
-      this.notificationService.info('Succès', `La tâche #${task.id} a été créée`)
+      this.eventService.submit(new TaskCreatedEvent(task.id))
     }).catch(error => {
-      console.error(error)
-      this.notificationService.error('Erreur', 'La tâche n\'a pas pu être créée')
+      this.eventService.submit(new TaskCreationFailedEvent())
     })
   }
 

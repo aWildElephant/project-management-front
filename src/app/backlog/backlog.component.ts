@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 
 import { Status, Task } from '../backend-client/task.interface'
 import { TaskService } from '../backend-client/task.service'
+import { EventService } from '../event/event.service'
 
 @Component({
   selector: 'app-backlog',
@@ -14,9 +15,19 @@ export class BacklogComponent implements OnInit {
   inProgressTasks: Task[] = []
   doneTasks: Task[] = []
 
-  constructor(private taskService: TaskService) { }
+  constructor(private eventService: EventService, private taskService: TaskService) { }
 
   async ngOnInit(): Promise<void> {
+    await this.queryTasks()
+
+    this.eventService.subscribeToTaskCreated(() => this.queryTasks())
+    this.eventService.subscribeToTaskDeleted(() => this.queryTasks())
+    this.eventService.subscribeToTaskStatusChanged(() => this.queryTasks())
+  }
+
+  private async queryTasks(): Promise<void> {
+    console.log("Refreshing task list")
+    
     const tasks = await this.taskService.list()
 
     const openTasks: Task[] = []

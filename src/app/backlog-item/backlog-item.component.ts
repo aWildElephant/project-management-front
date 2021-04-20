@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core'
 
 import { Task, Status } from '../backend-client/task.interface'
+import { EventService } from '../event/event.service'
 import { TaskService } from '../backend-client/task.service'
-import { NotificationService } from '../notification/notification.service'
+import { TaskDeletedEvent, TaskDeletionFailedEvent, TaskStatusChangedEvent, TaskStatusChangeFailedEvent } from '../event/event.interface'
 
 @Component({
   selector: 'app-backlog-item',
@@ -15,24 +16,32 @@ export class BacklogItemComponent {
 
   @Input() task?: Task
 
-  constructor(private taskService: TaskService, private notificationService: NotificationService) { }
+  constructor(private eventService: EventService, private taskService: TaskService) { }
 
   deleteTask(): void {
     const taskId = this.task?.id
     if (taskId) {
       this.taskService.delete(taskId)
         .then(() => {
-          this.notificationService.info('Tâche supprimée', `La tâche ${taskId} a été supprimée`)
+          this.eventService.submit(new TaskDeletedEvent(taskId))
         })
         .catch(() => {
-          this.notificationService.error('Échec de la suppression', `Erreur lors de la suppression de la tâche ${taskId}`)
+          this.eventService.submit(new TaskDeletionFailedEvent(taskId))
         })
     }
   }
 
   updateTaskStatus(status: Status): void {
-    if (this.task?.id) {
-      this.taskService.updateStatus(this.task.id, status) // TODO: error handling
+    const taskId = this.task?.id
+    const previousStatus = this.task?.status
+    if (taskId) {
+      this.taskService.updateStatus(taskId, status)
+        .then(() => {
+          this.eventService.submit(new TaskStatusChangedEvent(taskId, previousStatus, status))
+        })
+        .catch(() => {
+          this.eventService.submit(new TaskStatusChangeFailedEvent(taskId))
+        })
     }
   }
 }

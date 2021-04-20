@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { NotificationAreaComponent } from './notification-area/notification-area.component'
-import { NotificationService } from './notification.service'
 
 @NgModule({
   declarations: [
@@ -13,9 +12,6 @@ import { NotificationService } from './notification.service'
   ],
   exports: [
     NotificationAreaComponent
-  ],
-  providers: [
-    NotificationService
   ]
 })
 export class NotificationModule { }

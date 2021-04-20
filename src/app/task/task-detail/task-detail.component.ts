@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 
-import { NotificationService } from '../../notification/notification.service'
 import { Task } from '../../backend-client/task.interface'
-import { TaskService } from '../..//backend-client/task.service'
+import { TaskService } from '../../backend-client/task.service'
+import { EventService } from 'src/app/event/event.service'
+import { GetTaskFailedEvent } from 'src/app/event/event.interface'
 
 @Component({
   selector: 'app-task-detail',
@@ -17,7 +18,7 @@ export class TaskDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private notificationService: NotificationService,
+    private eventService: EventService,
     private taskService: TaskService
   ) { }
 
@@ -40,7 +41,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   private displayErrorAndGoToBacklog(id: number): void {
-    this.notificationService.error('Échec du chargement', `Impossible d'afficher le détail de la tâche #${id}`)
+    this.eventService.submit(new GetTaskFailedEvent(id))
     this.router.navigate([''])
   }
 }
