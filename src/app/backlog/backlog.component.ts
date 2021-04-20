@@ -26,8 +26,6 @@ export class BacklogComponent implements OnInit {
   }
 
   private async queryTasks(): Promise<void> {
-    console.log("Refreshing task list")
-    
     const tasks = await this.taskService.list()
 
     const openTasks: Task[] = []

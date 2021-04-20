@@ -1,5 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Event, EventType, GetTaskFailedEvent, TaskCreatedEvent, TaskCreationFailedEvent, TaskDeletedEvent, TaskDeletionFailedEvent, TaskStatusChangedEvent, TaskStatusChangeFailedEvent } from './event.interface';
+import { EventEmitter, Injectable } from '@angular/core'
+import { Event, EventType, GetTaskFailedEvent, TaskCreatedEvent, TaskCreationFailedEvent, TaskDeletedEvent, TaskDeletionFailedEvent, TaskStatusChangedEvent, TaskStatusChangeFailedEvent } from './event.interface'
 
 @Injectable({
   providedIn: 'root'
