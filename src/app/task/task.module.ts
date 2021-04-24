@@ -18,5 +18,8 @@ import { TaskStatusPipe } from './task-status.pipe'
   exports: [
     TaskDetailComponent
   ],
+  providers: [
+    TaskStatusPipe
+  ]
 })
 export class TaskModule { }

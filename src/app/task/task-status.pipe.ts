@@ -6,13 +6,13 @@ export class TaskStatusPipe implements PipeTransform {
     transform(status?: Status): string {
         switch (status) {
             case Status.OPEN:
-                return 'À faire'
+                return 'à faire'
             case Status.IN_PROGRESS:
-                return 'En cours'
+                return 'en cours'
             case Status.DONE:
-                return 'Terminé'
+                return 'terminé'
             default:
-                return '-'
+                return '?'
         }
     }
 }

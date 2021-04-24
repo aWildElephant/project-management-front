@@ -7,9 +7,9 @@
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" [routerLink]="['/task', task?.id]">Détails</a></li>
-            <li *ngIf="task?.status === taskStatus.IN_PROGRESS"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.OPEN)" role="button">Mettre le statut à 'Ouvert'</a></li>
-            <li *ngIf="task?.status === taskStatus.OPEN || task?.status === taskStatus.DONE"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.IN_PROGRESS)" role="button">Mettre le statut à 'En cours'</a></li>
-            <li *ngIf="task?.status === taskStatus.IN_PROGRESS"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.DONE)" role="button">Mettre le statut à 'Terminé'</a></li>
+            <li *ngIf="task?.status === taskStatus.IN_PROGRESS"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.OPEN)" role="button">Mettre le statut à 'à faire'</a></li>
+            <li *ngIf="task?.status === taskStatus.OPEN || task?.status === taskStatus.DONE"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.IN_PROGRESS)" role="button">Mettre le statut à 'en cours'</a></li>
+            <li *ngIf="task?.status === taskStatus.IN_PROGRESS"><a class="dropdown-item" (click)="updateTaskStatus(taskStatus.DONE)" role="button">Mettre le statut à 'terminé'</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="deleteTask()" role="button">Supprimer</a></li>
         </ul>

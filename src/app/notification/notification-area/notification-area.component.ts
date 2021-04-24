@@ -3,6 +3,7 @@ import { Toast } from 'bootstrap'
 import { AppNotification, AppNotificationLevel } from '../notification.interface'
 import { EventService } from 'src/app/event/event.service'
 import { GetTaskFailedEvent, TaskCreatedEvent, TaskCreationFailedEvent, TaskDeletedEvent, TaskDeletionFailedEvent, TaskStatusChangedEvent, TaskStatusChangeFailedEvent } from 'src/app/event/event.interface'
+import { TaskStatusPipe } from 'src/app/task/task-status.pipe'
 
 @Component({
   selector: 'app-notification-area',
@@ -17,7 +18,7 @@ export class NotificationAreaComponent implements OnInit {
   lastNotification?: AppNotification
   nextNotification?: AppNotification
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private taskStatusPipe: TaskStatusPipe) { }
 
   ngOnInit(): void {
     const toastElement = document.getElementById('lastNotificationToast')
@@ -77,7 +78,7 @@ export class NotificationAreaComponent implements OnInit {
     this.handle({
       level: AppNotificationLevel.INFO,
       message: 'Statut mis à jour',
-      description: `Le statut de la tâche ${event.id} a été changé de ${event.previousStatus} à ${event.newStatus}`
+      description: `Le nouveau statut de la tâche ${event.id} est  '${this.taskStatusPipe.transform(event.newStatus)}'`
     })
   }
 
