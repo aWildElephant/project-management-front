@@ -1,0 +1,4 @@
+<p>Statut: <span>{{ task?.status | taskStatus }}</span></p>
+<p>Création: <span>{{ task?.creationTimestamp | date:"yyyy/MM/dd" }}</span></p>
+<p>Dernière modification: <span>{{ task?.modificationTimestamp | date:"yyyy/MM/dd" }}</span></p>
+<button (click)="deleteTask()" class="btn btn-danger">Supprimer la tâche</button>
